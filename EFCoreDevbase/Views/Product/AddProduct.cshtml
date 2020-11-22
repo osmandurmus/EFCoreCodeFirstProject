@@ -1,0 +1,44 @@
+﻿@model EFCoreDevbase.Models.Product
+@{
+    ViewData["Title"] = "AddProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Ürün Ekle</h4>
+<br />
+
+
+@using (Html.BeginForm("AddProduct", "Product", FormMethod.Post))
+{
+
+<form>
+
+    <div class="form-group">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.productName)
+            @Html.TextBoxFor(m => m.productName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.productName, "", new { @style = "color:red" })
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.productUnitPrice)
+            @Html.TextBoxFor(m => m.productUnitPrice, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.productUnitPrice, "", new { @style = "color:red" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.productStockQuantity)
+            @Html.TextBoxFor(m => m.productStockQuantity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.productStockQuantity, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Ekle</button>
+    <a class="btn btn-warning" href="/Product/Index">Vazgeç</a>
+</form>
+}
+
+

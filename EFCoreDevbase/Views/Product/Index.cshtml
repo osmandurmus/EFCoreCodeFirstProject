@@ -1,0 +1,61 @@
+﻿@using EFCoreDevbase.Models
+@model IEnumerable<EFCoreDevbase.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Ürünler listesi</h4>
+<br />
+
+
+@using (Html.BeginForm("SearchProduct", "Product", FormMethod.Get))
+{
+    <p>
+        Ürün Adı Ara: @Html.TextBox("p")
+        <input class="btn btn-primary btn-sm text-right" type="submit" value="Ürün Ara"/>
+    </p>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["IdSortParm"]">@Html.DisplayNameFor(model => model.productID) <i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.productName) <i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UnitPriceSortParm"]">@Html.DisplayNameFor(model => model.productUnitPrice) <i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["QuantitySortParm"]">@Html.DisplayNameFor(model => model.productStockQuantity) <i class="fas fa-sort"></i></a>
+            </th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.productID</td>
+                <td>@p.productName</td>
+                <td>@p.productUnitPrice</td>
+                <td>@p.productStockQuantity</td>
+                <td><a class="btn btn-primary" href="/Product/UpdateProduct/@p.productID">Düzenle</a></td>
+                <td><a class="btn btn-danger" href="/Product/DeleteProduct/@p.productID">Sil</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<a href="/Product/AddProduct/" class="btn btn-success">Yeni Ürün Ekle</a>
+
+
+
+
